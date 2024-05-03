@@ -1,8 +1,7 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import "firebase/firestore";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+import "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
-// Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyClC05fx90Kqif1soTSU4_8AZBD-7F5-OM",
@@ -38,7 +37,7 @@ form.onSubmit = async (e) => {
             const user = await signInWithEmailAndPassword(auth, email, password);
             if (user) {
                 if(confirm('Are you sure you want to delete your account? It can not be undone')) {
-                    await deleteUser(user);
+                    await deleteDoc(doc(db, 'users', user.uid));
                     alert('Account deleted successfully');
                 } else {
                     alert('Account deletion cancelled');
