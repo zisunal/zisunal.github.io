@@ -21,7 +21,7 @@ const db = getFirestore(app);
 
 // Get form
 const form = document.querySelector('#delete-form')
-form.onSubmit = async (e) => {
+form.onsubmit = async (e) => {
     e.preventDefault();
     const email = form.email.value;
     const password = form.password.value;
