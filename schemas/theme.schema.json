@@ -1,0 +1,170 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://zisunal.github.io/schemas/theme.schema.json",
+  "title": "Theme Configuration Schema",
+  "description": "Schema for theme configuration files used across the Laravel application",
+  "type": "object",
+  "required": ["name", "version", "description", "license", "type"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The human-readable name of the theme",
+      "minLength": 1,
+      "maxLength": 255,
+      "examples": ["Default Theme", "Material Theme"]
+    },
+    "version": {
+      "type": "string",
+      "description": "The semantic version of the theme",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+      "examples": ["1.0.0", "2.1.0-beta", "1.0.0+build.123"]
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed description of the theme's purpose and features",
+      "minLength": 1,
+      "maxLength": 1000,
+      "examples": ["The default theme for the application, providing a clean and modern design."]
+    },
+    "license": {
+      "type": "string",
+      "description": "The license under which the theme is distributed",
+      "minLength": 1,
+      "maxLength": 100,
+      "examples": ["Proprietary", "MIT", "Apache-2.0", "GPL-3.0"]
+    },
+    "keywords": {
+      "type": "array",
+      "description": "Array of keywords for theme categorization and discovery",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 50
+      },
+      "minItems": 0,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "examples": [["default", "theme", "clean", "modern"]]
+    },
+    "type": {
+      "type": "object",
+      "description": "Theme type specifications defining the template engine and framework",
+      "required": ["main", "sub"],
+      "additionalProperties": false,
+      "properties": {
+        "main": {
+          "type": "string",
+          "description": "Primary template engine or framework type",
+          "enum": ["blade", "inertia"],
+          "examples": ["blade", "inertia"]
+        },
+        "sub": {
+          "type": "string",
+          "description": "Secondary framework or scripting framework used",
+          "enum": ["blade", "react", "vue", "livewire", "vue3"],
+          "examples": ["blade", "react"]
+        }
+      }
+    },
+    "preview": {
+      "type": "object",
+      "description": "Preview images for the theme in different color modes",
+      "additionalProperties": false,
+      "properties": {
+        "light": {
+          "type": "string",
+          "description": "File path to the light mode preview image",
+          "minLength": 1,
+          "maxLength": 255,
+          "examples": ["preview-light.png"]
+        },
+        "dark": {
+          "type": "string",
+          "description": "File path to the dark mode preview image",
+          "minLength": 1,
+          "maxLength": 255,
+          "examples": ["preview-dark.png"]
+        }
+      }
+    },
+    "company": {
+      "type": "object",
+      "description": "Company information associated with the theme",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Company or organization name",
+          "minLength": 1,
+          "maxLength": 255,
+          "examples": ["Fintech Point"]
+        },
+        "email": {
+          "type": "string",
+          "description": "Company contact email address",
+          "format": "email",
+          "maxLength": 255,
+          "examples": ["admin@fintech-point.com"]
+        },
+        "url": {
+          "type": "string",
+          "description": "Company website URL",
+          "format": "uri",
+          "maxLength": 2048,
+          "examples": ["https://fintech-point.com"]
+        }
+      }
+    },
+    "authors": {
+      "type": "array",
+      "description": "List of theme authors and contributors",
+      "items": {
+        "type": "object",
+        "description": "Author or contributor information",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Full name of the author",
+            "minLength": 1,
+            "maxLength": 255,
+            "examples": ["MD Al Fariya Zisun"]
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address of the author",
+            "format": "email",
+            "maxLength": 255,
+            "examples": ["zisun@fintech-point.com"]
+          },
+          "role": {
+            "type": "string",
+            "description": "Role or position of the author",
+            "minLength": 1,
+            "maxLength": 255,
+            "examples": ["Manager, Software Engineer", "Designer", "Developer"]
+          },
+          "url": {
+            "type": "string",
+            "description": "Personal or professional website URL of the author",
+            "format": "uri",
+            "maxLength": 2048,
+            "examples": ["https://zisunal.com"]
+          }
+        }
+      },
+      "minItems": 0,
+      "maxItems": 50
+    },
+    "extras": {
+      "type": "object",
+      "description": "Additional custom properties and metadata for the theme",
+      "additionalProperties": true,
+      "examples": [{
+        "customProperty1": "Custom value 1",
+        "customProperty2": "Custom value 2"
+      }]
+    }
+  }
+}
