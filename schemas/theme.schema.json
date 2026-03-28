@@ -14,10 +14,10 @@
       "maxLength": 255,
       "examples": ["Default Theme", "Material Theme"]
     },
-    "slug":: {
+    "slug": {
       "type": "string",
       "description": "The slug of the theme. Must be url-friendly",
-      "examples": ["material", "sleek", "clasic"]
+      "examples": ["material", "sleek", "classic"]
     },
     "version": {
       "type": "string",
