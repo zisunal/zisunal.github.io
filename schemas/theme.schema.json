@@ -80,6 +80,22 @@
         }
       }
     },
+    "preview": {
+      "type": "object",
+      "description": "Theme previews",
+      "required": ["light", "dark"],
+      "additionalProperties": false,
+      "properties": {
+        "light": {
+          "type": "string",
+          "description": "Light preview image file under the previews directory"
+        },
+        "dark": {
+          "type": "string",
+          "description": "Dark preview image file under the previews directory"
+        }
+      }
+    },
     "assets": {
       "type": "array",
       "items": {
