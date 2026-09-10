@@ -32,10 +32,6 @@
       "maxLength": 1000,
       "examples": ["The default theme for the application, providing a clean and modern design."]
     },
-    "is_archived": {
-      "type": "boolean",
-      "description": "If the theme is archived and can't be purchased by any new tenant (in case of SAAS project)."
-    },
     "is_tenant": {
       "type": "boolean",
       "description": "If the theme is for tenant or for saas owner (in case of SAAS project).",
