@@ -1,10 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://zisunal.github.io/schemas/theme.schema.json",
-  "title": "Theme Configuration Schema",
+  "title": "Theme Configuration Schema for Lara Suite SAAS",
   "description": "Schema for theme configuration files used across the Laravel application",
   "type": "object",
-  "required": ["name", "version", "description", "license", "type"],
+  "required": ["name", "slug", "version", "description", "license", "type", "authors"],
   "additionalProperties": false,
   "properties": {
     "name": {
@@ -31,6 +31,14 @@
       "minLength": 1,
       "maxLength": 1000,
       "examples": ["The default theme for the application, providing a clean and modern design."]
+    },
+    "is_archived": {
+      "type": "boolean",
+      "description": "If the theme is archived and can't be purchased by any new tenant (in case of SAAS project)."
+    },
+    "is_tenant": {
+      "type": "boolean",
+      "description": "If the theme is for tenant or for saas owner (in case of SAAS project).",
     },
     "license": {
       "type": "string",
@@ -72,25 +80,22 @@
         }
       }
     },
-    "preview": {
-      "type": "object",
-      "description": "Preview images for the theme in different color modes",
-      "additionalProperties": false,
-      "properties": {
-        "light": {
-          "type": "string",
-          "description": "File path to the light mode preview image",
-          "minLength": 1,
-          "maxLength": 255,
-          "examples": ["preview-light.png"]
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "image_url": {
+            "type": "string"
+          },
+          "device_type": {
+            "type": "string"
+          }
         },
-        "dark": {
-          "type": "string",
-          "description": "File path to the dark mode preview image",
-          "minLength": 1,
-          "maxLength": 255,
-          "examples": ["preview-dark.png"]
-        }
+        "required": [
+          "image_url",
+          "device_type"
+        ]
       }
     },
     "company": {
@@ -119,7 +124,13 @@
           "maxLength": 2048,
           "examples": ["https://fintech-point.com"]
         }
-      }
+      },
+      "required": [
+          "name",
+          "email",
+          "role",
+          "url"
+        ]
     },
     "authors": {
       "type": "array",
@@ -143,6 +154,13 @@
             "maxLength": 255,
             "examples": ["zisun@fintech-point.com"]
           },
+          "phone": {
+            "type": "string",
+            "description": "Phone number with Country Code",
+            "format": "phone",
+            "maxLength": 255,
+            "examples": ["+8801700000000"]
+          },
           "role": {
             "type": "string",
             "description": "Role or position of the author",
@@ -161,6 +179,29 @@
       },
       "minItems": 0,
       "maxItems": 50
+    },
+    "licenses": {
+      "type": "array",
+      "description": "Licenses for the Theme (in case of saas project).",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "price"
+        ]
+      }
     },
     "extras": {
       "type": "object",
